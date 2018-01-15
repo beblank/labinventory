@@ -6,12 +6,20 @@
     android:orientation="vertical"
     tools:context=".fragments.ToolListFragment">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/searchFilter"/>
+
     <ListView
+        android:id="@+id/tool_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
-    <TextView
+        android:layout_height="500dp"></ListView>
+    <Button
+        android:id="@+id/tool_add_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:text="Add" />
 
 </LinearLayout>

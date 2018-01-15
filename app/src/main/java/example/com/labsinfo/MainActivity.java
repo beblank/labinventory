@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import example.com.labsinfo.common.RxBaseActivity;
 import example.com.labsinfo.common.RxBus;
 import example.com.labsinfo.common.Utils;
+import example.com.labsinfo.fragments.AddItemFragment;
 import example.com.labsinfo.fragments.MainFragment;
 import example.com.labsinfo.fragments.OrderListFragment;
 import example.com.labsinfo.fragments.ToolListFragment;
@@ -53,7 +54,7 @@ public class MainActivity extends RxBaseActivity {
                 if (o == Utils.TOOL_LIST) {
                     changeFragment(getFragmentManager(), new ToolListFragment(), R.id.activity_base_content, Utils.TOOL_LIST, false);
                 } else if (o == Utils.ORDER_LIST) {
-                    changeFragment(getFragmentManager(), new OrderListFragment(), R.id.activity_base_content, Utils.TOOL_LIST, false);
+                    changeFragment(getFragmentManager(), new OrderListFragment(), R.id.activity_base_content, Utils.ORDER_LIST, false);
                 }
             }
         }));
