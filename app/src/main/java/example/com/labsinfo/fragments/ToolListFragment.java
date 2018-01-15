@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import example.com.labsinfo.R;
+import example.com.labsinfo.common.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ToolListFragment extends Fragment {
+public class ToolListFragment extends BaseFragment {
 
 
     public ToolListFragment() {
@@ -24,7 +25,11 @@ public class ToolListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tool_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_tool_list, container, false);
+
+        bind(this, view);
+
+        return view;
     }
 
 }
