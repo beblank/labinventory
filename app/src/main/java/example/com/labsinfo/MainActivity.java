@@ -1,6 +1,5 @@
 package example.com.labsinfo;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -11,6 +10,9 @@ import butterknife.ButterKnife;
 import example.com.labsinfo.common.RxBaseActivity;
 import example.com.labsinfo.common.RxBus;
 import example.com.labsinfo.common.Utils;
+import example.com.labsinfo.fragments.MainFragment;
+import example.com.labsinfo.fragments.OrderListFragment;
+import example.com.labsinfo.fragments.ToolListFragment;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends RxBaseActivity {
@@ -19,13 +21,13 @@ public class MainActivity extends RxBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        changeFragment(getFragmentManager(), new MainFragment(), R.id.activity_base_content, Utils.MAIN_FRAGMENT);
+        changeFragment(getFragmentManager(), new MainFragment(), R.id.activity_base_content, Utils.MAIN_FRAGMENT, false);
 
     }
 
-    private void changeFragment(FragmentManager fm, Fragment f, int contentID, String tag) {
+    private void changeFragment(FragmentManager fm, Fragment f, int contentID, String tag, Boolean cleanStack) {
         FragmentTransaction ft = fm.beginTransaction();
-        clearBackStack(fm);
+        if (cleanStack) {clearBackStack(fm);}
         ft.replace(contentID, f, tag)
                 .addToBackStack(null)
                 .commit();
@@ -49,9 +51,20 @@ public class MainActivity extends RxBaseActivity {
             @Override
             public void accept(Object o) throws Exception {
                 if (o == Utils.TOOL_LIST) {
-                    Log.d("dodol", "accept: go to tools list");
+                    changeFragment(getFragmentManager(), new ToolListFragment(), R.id.activity_base_content, Utils.TOOL_LIST, false);
+                } else if (o == Utils.ORDER_LIST) {
+                    changeFragment(getFragmentManager(), new OrderListFragment(), R.id.activity_base_content, Utils.TOOL_LIST, false);
                 }
             }
         }));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getFragmentManager().findFragmentByTag(Utils.MAIN_FRAGMENT);
+        if (fragment.isVisible()){
+        } else {
+            super.onBackPressed();
+        }
     }
 }

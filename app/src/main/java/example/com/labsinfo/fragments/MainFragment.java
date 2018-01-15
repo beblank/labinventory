@@ -1,6 +1,7 @@
-package example.com.labsinfo;
+package example.com.labsinfo.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import example.com.labsinfo.R;
+import example.com.labsinfo.common.BaseFragment;
 import example.com.labsinfo.common.RxBus;
 import example.com.labsinfo.common.Utils;
 
@@ -18,7 +21,7 @@ import example.com.labsinfo.common.Utils;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends BaseFragment {
 
 
     private Unbinder unbinder;
@@ -32,10 +35,9 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        unbinder = ButterKnife.bind(this, view);
+        bind(this, view);
 
         return view;
     }
@@ -45,9 +47,8 @@ public class MainFragment extends Fragment {
         RxBus.getInstance().send(Utils.TOOL_LIST);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    @OnClick(R.id.order_btn)
+    public void showOrdeerListFragment() {
+        RxBus.getInstance().send(Utils.ORDER_LIST);
     }
 }
